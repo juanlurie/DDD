@@ -2,7 +2,7 @@
 {
     public interface IInMemoryBus
     {
-        void Publish(IEvent message);
-        void Send(ICommand command);
+        void Publish<TEvent>(TEvent message) where TEvent : IEvent;
+        void Send<TCommand>(TCommand command) where TCommand : ICommand;
     }
 }

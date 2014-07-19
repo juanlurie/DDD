@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
+using System.Threading;
 using Autofac;
 using DomainEvents.Contracts;
 
@@ -18,18 +18,20 @@ namespace DomainEvents.Dispatcher
             this.container = container;
         }
 
-        public void Publish(IEvent message)
+        public void Publish<TEvent>(TEvent message) where TEvent : IEvent
         {
             IEnumerable eventHandlers = GetMatchingHandlers(message);
             foreach (object handler in eventHandlers)
             {
                 MethodInfo handlerMethod = handler.GetType().GetMethod("Handle", new[] { message.GetType() });
 
-                handlerMethod.Invoke(handler, new object[] { message });
+                var methodHandler = handler;
+                Action<TEvent> action = delegate { handlerMethod.Invoke(methodHandler, new object[] { message }); };
+                ThreadPool.QueueUserWorkItem(x => action(message));
             }
         }
 
-        public void Send(ICommand command)
+        public void Send<TCommand>(TCommand command) where TCommand : ICommand
         {
             IEnumerable eventHandlers = GetMatchingHandlers(command);
 
@@ -43,14 +45,14 @@ namespace DomainEvents.Dispatcher
             RunAsync(command, item);
         }
 
-        private void RunAsync(ICommand command, Action<ICommand> action)
+        private void RunAsync<TCommand>(TCommand command, Action<TCommand> action) where TCommand : ICommand
         {
-            action.BeginInvoke(command, Callback, action);
+            action.BeginInvoke(command, Callback<TCommand>, action);
         }
 
-        private void Callback(IAsyncResult asyncResult)
+        private void Callback<TCommand>(IAsyncResult asyncResult) where TCommand : ICommand
         {
-            var asyncAction = (Action<ICommand>)asyncResult.AsyncState;
+            var asyncAction = (Action<TCommand>)asyncResult.AsyncState;
             asyncAction.EndInvoke(asyncResult);
         }
 
@@ -62,15 +64,15 @@ namespace DomainEvents.Dispatcher
             return ResolveAll(genericHandlerType);
         }
 
-        private List<Action<ICommand>> GetCommandHandlers(ICommand command, IEnumerable eventHandlers)
+        private List<Action<TCommand>> GetCommandHandlers<TCommand>(TCommand command, IEnumerable eventHandlers) where TCommand : ICommand
         {
-            var handlers = new List<Action<ICommand>>();
+            var handlers = new List<Action<TCommand>>();
             foreach (object handler in eventHandlers)
             {
                 var methodInfo = handler.GetType().GetMethod("Handle", new[] { command.GetType() });
 
                 var methodHandler = handler;
-                Action<ICommand> action = delegate { methodInfo.Invoke(methodHandler, new object[] { command }); };
+                Action<TCommand> action = delegate { methodInfo.Invoke(methodHandler, new object[] { command }); };
                 handlers.Add(action);
             }
 
