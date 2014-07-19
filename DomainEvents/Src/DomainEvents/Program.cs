@@ -2,7 +2,8 @@
 using System.Reflection;
 using Autofac;
 using DomainEvents.Contracts;
-using DomainEvents.Services;
+using DomainEvents.Dispatcher;
+using DomainEvents.Events;
 
 namespace DomainEvents
 {
@@ -14,8 +15,9 @@ namespace DomainEvents
         {
             Initialise();
 
-            var appService = container.Resolve<ApplicationService>();
-            appService.UpdateName();
+            var bus = container.Resolve<IInMemoryBus>();
+            var command = new ChangeName("asd", "asd");
+            bus.Send(command);
 
             Console.Read();
         }
@@ -28,7 +30,6 @@ namespace DomainEvents
                 .AsClosedTypesOf(typeof(IHandle<>))
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<ApplicationService>();
             builder.RegisterType<InMemoryBus>().As<IInMemoryBus>();
 
             container = builder.Build();

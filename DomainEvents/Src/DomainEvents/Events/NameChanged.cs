@@ -13,4 +13,16 @@ namespace DomainEvents.Events
             NewName = newName;
         }
     }
+
+    public class ChangeName: ICommand
+    {
+        public string NewName;
+        public string OldName;
+
+        public ChangeName(string oldName, string newName)
+        {
+            OldName = oldName;
+            NewName = newName;
+        }
+    }
 }

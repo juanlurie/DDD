@@ -3,7 +3,7 @@ using DomainEvents.Events;
 
 namespace DomainEvents.Services
 {
-    public class ApplicationService 
+    public class ApplicationService : IHandle<ChangeName>
     {
         private readonly IInMemoryBus inMemoryBus;
 
@@ -12,9 +12,9 @@ namespace DomainEvents.Services
             this.inMemoryBus = inMemoryBus;
         }
 
-        public void UpdateName()
+        public void Handle(ChangeName command)
         {
-            var nameChanged = new NameChanged("", "");
+            var nameChanged = new NameChanged(command.OldName, command.NewName);
 
             inMemoryBus.Publish(nameChanged);
         }
