@@ -14,6 +14,10 @@ namespace DomainEvents.Events
         }
     }
 
+    public class DoSomethingThatTakesLong : ICommand
+    {
+    }
+
     public class ChangeName: ICommand
     {
         public string NewName;

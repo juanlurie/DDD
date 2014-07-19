@@ -16,6 +16,10 @@ namespace DomainEvents
             Initialise();
 
             var bus = container.Resolve<IInMemoryBus>();
+
+            var command2 = new DoSomethingThatTakesLong();
+            bus.Send(command2);
+
             var command = new ChangeName("asd", "asd");
             bus.Send(command);
 

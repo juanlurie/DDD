@@ -1,9 +1,13 @@
-﻿using DomainEvents.Contracts;
+﻿using System;
+using System.Threading;
+using DomainEvents.Contracts;
 using DomainEvents.Events;
 
 namespace DomainEvents.Services
 {
-    public class ApplicationService : IHandle<ChangeName>
+    public class ApplicationService :
+          IHandle<ChangeName>
+        , IHandle<DoSomethingThatTakesLong>
     {
         private readonly IInMemoryBus inMemoryBus;
 
@@ -17,6 +21,12 @@ namespace DomainEvents.Services
             var nameChanged = new NameChanged(command.OldName, command.NewName);
 
             inMemoryBus.Publish(nameChanged);
+        }
+
+        public void Handle(DoSomethingThatTakesLong @event)
+        {
+            Thread.Sleep(10000);
+            Console.WriteLine("Done Async");
         }
     }
 }

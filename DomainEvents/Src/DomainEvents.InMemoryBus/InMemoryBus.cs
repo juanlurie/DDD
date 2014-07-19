@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Autofac;
 using DomainEvents.Contracts;
 
@@ -38,7 +39,19 @@ namespace DomainEvents.Dispatcher
                 throw new Exception(string.Format("Cannot have multiple command handlers. {0}", command.GetType().Name));
 
             var item = handlers.First();
-            item.Invoke(command);
+
+            RunAsync(command, item);
+        }
+
+        private void RunAsync(ICommand command, Action<ICommand> action)
+        {
+            action.BeginInvoke(command, Callback, action);
+        }
+
+        private void Callback(IAsyncResult asyncResult)
+        {
+            var asyncAction = (Action<ICommand>)asyncResult.AsyncState;
+            asyncAction.EndInvoke(asyncResult);
         }
 
         private IEnumerable GetMatchingHandlers(object message)
