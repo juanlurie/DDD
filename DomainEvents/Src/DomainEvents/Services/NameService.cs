@@ -8,7 +8,7 @@ namespace DomainEvents.Services
     {
         public void Handle(NameChanged @event)
         {
-            Console.WriteLine("Emailing");
+            Console.WriteLine("EVENT HANDLED {0}: Emailing",@event.GetType().Name);
         }
     }
 
@@ -16,7 +16,7 @@ namespace DomainEvents.Services
     {
         public void Handle(NameChanged @event)
         {
-            Console.WriteLine("Logging");
+            Console.WriteLine("EVENT HANDLED {0}: Logging", @event.GetType().Name);
         }
     }
 
@@ -24,7 +24,7 @@ namespace DomainEvents.Services
     {
         public void Handle(NameChanged @event)
         {
-            Console.WriteLine("Projecting");
+            Console.WriteLine("EVENT HANDLED {0}: Projecting", @event.GetType().Name);
         }
     }
 }
