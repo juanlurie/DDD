@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Hermes.Core</id>
+    <version>$version$</version>
+    <authors>Adrian Freemantle</authors>
+    <owners>Adrian Freemantle</owners>
+    <projectUrl>https://github.com/AdrianFreemantle/Hermes</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Core Hermes core libraries.</description>
+    <dependencies>
+      <dependency id="CommonServiceLocator" version="1.3" />
+      <dependency id="log4net" version="2.0.3" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\bin\Hermes.dll" target="lib\net45" />
+    <file src="..\bin\Hermes.pdb" target="lib\net45" />
+    <file src="..\bin\Hermes.Domain.dll" target="lib\net45" />
+    <file src="..\bin\Hermes.Domain.pdb" target="lib\net45" />
+  </files>
+</package>
