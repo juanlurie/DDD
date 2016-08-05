@@ -34,7 +34,7 @@ namespace Iris.EntityFramework
             containerBuilder.RegisterType<ContextFactory<TContext>>();
             containerBuilder.RegisterType<EntityFrameworkUnitOfWork>( );
             containerBuilder.RegisterType<DatabaseQuery>( );
-            containerBuilder.RegisterType<KeyValueStorePersister>( );
+            containerBuilder.RegisterType<KeyValueStorePersister>();
             containerBuilder.RegisterType<AggregateRepository>( );
             containerBuilder.RegisterType<QueueFactory>( );
             containerBuilder.RegisterType<QueueStore>( );

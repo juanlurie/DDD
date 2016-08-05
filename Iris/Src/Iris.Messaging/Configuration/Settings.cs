@@ -15,7 +15,6 @@ namespace Iris.Messaging.Configuration
         private static int numberOfWorkers = 1;
         private static readonly Dictionary<string, string> settings = new Dictionary<string, string>();
         
-        private static bool autoSubscribeEvents = true;
         private static IContainer rootContainer;
 
         public static int SecondLevelRetryAttempts { get; internal set; }
@@ -23,7 +22,6 @@ namespace Iris.Messaging.Configuration
         public static Func<Type, bool> IsCommandType { get; internal set; }
         public static Func<Type, bool> IsEventType { get; internal set; }
         
-        public static bool DisableDistributedTransactions { get; internal set; }
         public static bool IsClientEndpoint { get; internal set; }
         public static bool SubsribeToDomainEvents { get; internal set; }
         public static bool DisablePerformanceMonitoring { get; internal set; }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Transactions;
 using Iris.Ioc;
 using Iris.Logging;
-using Iris.Messaging.Configuration;
 using Iris.Messaging.Transports;
 using Iris.Pipes;
 using Microsoft.Practices.ServiceLocation;
@@ -12,7 +11,7 @@ namespace Iris.Messaging.Pipeline
 {
     public class IncomingMessageContext : IMessageContext, IEquatable<IMessageContext>, IEquatable<IncomingMessageContext>
     {
-        public static readonly ILog Logger = LogFactory.BuildLogger(typeof (IncomingMessageContext));
+        public static readonly ILog Logger = LogFactory.BuildLogger(typeof(IncomingMessageContext));
         public TransportMessage TransportMessage { get; private set; }
         public bool IsLocalMessage { get; private set; }
         public IServiceLocator ServiceLocator { get; private set; }
@@ -51,12 +50,12 @@ namespace Iris.Messaging.Pipeline
         public string UserName
         {
             get { return GetUserName(); }
-        } 
+        }
 
         protected IncomingMessageContext()
         {
         }
-       
+
         public IncomingMessageContext(TransportMessage transportMessage, IServiceLocator serviceLocator)
         {
             TransportMessage = transportMessage;
@@ -87,14 +86,8 @@ namespace Iris.Messaging.Pipeline
 
         protected virtual TransactionScope StartTransactionScope()
         {
-            if (Settings.DisableDistributedTransactions)
-            {
-                Logger.Debug("Beginning a transaction scope with option[Suppress]");
-                return TransactionScopeUtils.Begin(TransactionScopeOption.Suppress);
-            }
-
-            Logger.Debug("Beginning a transaction scope with option[Required]");
-            return TransactionScopeUtils.Begin(TransactionScopeOption.Required);
+            Logger.Debug("Beginning a transaction scope with option[Suppress]");
+            return TransactionScopeUtils.Begin(TransactionScopeOption.Suppress);
         }
 
         public string GetUserName()
@@ -110,19 +103,6 @@ namespace Iris.Messaging.Pipeline
         public bool IsControlMessage()
         {
             return TransportMessage.Headers.ContainsKey(HeaderKeys.ControlMessageHeader);
-        }
-
-        public bool TryGetHeaderValue(string key, out HeaderValue value)
-        {
-            value = null;
-
-            if (TransportMessage.Headers.ContainsKey(key))
-            {
-                value = new HeaderValue(key, TransportMessage.Headers[key]);
-                return true;
-            }
-
-            return false;
         }
 
         public void SetMessage(object message)
@@ -165,7 +145,7 @@ namespace Iris.Messaging.Pipeline
         public static bool operator !=(IncomingMessageContext left, IncomingMessageContext right)
         {
             return !Equals(left, right);
-        }        
+        }
 
         public override string ToString()
         {

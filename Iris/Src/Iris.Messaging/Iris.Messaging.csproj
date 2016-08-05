@@ -61,23 +61,14 @@
     <Compile Include="Configuration\MessageHandlerCache\HandlerCache.cs" />
     <Compile Include="Configuration\MessageHandlerCache\HandlerCacheItem.cs" />
     <Compile Include="ITask.cs" />
-    <Compile Include="Management\TransportMessageDto.cs" />
-    <Compile Include="Management\TransportMessageExtensions.cs" />
     <Compile Include="MessageExtensions.cs" />
     <Compile Include="Pipeline\IncomingMessageContext.cs" />
     <Compile Include="Pipeline\Modules\CommandValidationModule.cs" />
     <Compile Include="ScheduledWorkerService.cs" />
-    <Compile Include="Serialization\MessageSerializationExtensions.cs" />
     <Compile Include="Pipeline\Modules\DispatchMessagesModule.cs" />
     <Compile Include="SytemCircuitBreaker.cs" />
     <Compile Include="TaskScheduler.cs" />
-    <Compile Include="Transports\HeaderValueExtensions.cs" />
     <Compile Include="Transports\ITransportMessages.cs" />
-    <Compile Include="Transports\SqlTransport\SqlCommands.cs" />
-    <Compile Include="Transports\SqlTransport\SqlDataReaderExtensions.cs" />
-    <Compile Include="Transports\SqlTransport\SqlMessageDequeStrategy.cs" />
-    <Compile Include="Transports\SqlTransport\SqlMessageSender.cs" />
-    <Compile Include="Transports\SqlTransport\SqlTransportConfiguration.cs" />
     <Compile Include="Pipeline\Modules\UnitOfWorkModule.cs" />
     <Compile Include="Configuration\ConfigurationSettingNotFoundException.cs" />
     <Compile Include="Configuration\Configure.cs" />
@@ -85,7 +76,6 @@
     <Compile Include="IConfigureEndpoint.cs" />
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="HeaderKeys.cs" />
-    <Compile Include="Transports\HeaderValue.cs" />
     <Compile Include="Transports\MessageRuleValidation.cs" />
     <Compile Include="Configuration\MessageBusDependencyRegistrar.cs" />
     <Compile Include="Transports\Dispatcher.cs" />
@@ -107,7 +97,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Serialization\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

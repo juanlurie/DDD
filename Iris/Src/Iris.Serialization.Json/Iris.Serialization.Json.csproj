@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="MessageContractResolver.cs" />
     <Compile Include="JsonSerializerConfiguration.cs" />
-    <Compile Include="JsonMessageSerializer.cs" />
     <Compile Include="JsonObjectSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XContainerConverter.cs" />

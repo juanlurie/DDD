@@ -7,8 +7,7 @@ using Microsoft.Practices.ServiceLocation;
 
 namespace Iris.Messaging.Pipeline.Modules
 {
-    public class CommandValidationModule : 
-        IModule<IncomingMessageContext>
+    public class CommandValidationModule : IModule<IncomingMessageContext>
     {
         /// <summary>
         /// This is used for validation of commands being executed on the local bus
