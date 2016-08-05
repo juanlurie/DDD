@@ -11,6 +11,7 @@ using Iris.Messaging.EndPoints;
 using Iris.ObjectBuilder.Autofac;
 using Iris.Persistence;
 using Iris.Serialization.Json;
+using MySql.Data.Entity;
 
 namespace Iris.Simulator
 {
@@ -24,6 +25,7 @@ namespace Iris.Simulator
 
     }
 
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class TestContext : FrameworkContext
     {
         public IDbSet<TestTable> TestTable { get; set; }
@@ -98,7 +100,7 @@ namespace Iris.Simulator
         private EntityFramework.IRepository<TestTable> repository;
         private IQueryable<TestTable> query;
 
-        public Test(IInMemoryBus localBus, IRepositoryFactory repositoryFactory,IDatabaseQuery databaseQuery)
+        public Test(IInMemoryBus localBus, IRepositoryFactory repositoryFactory, IDatabaseQuery databaseQuery)
         {
             this.localBus = localBus;
             query = databaseQuery.GetQueryable<TestTable>();
@@ -113,6 +115,10 @@ namespace Iris.Simulator
         public void Handle(TestCommand m)
         {
             var a = query.Count();
+            var b = query.FirstOrDefault();
+            var c = query.SingleOrDefault(x => x.Id == 1);
+            var d = query.Any();
+            var e = query.Where(x => x.Id == 1);
 
             localBus.Raise(new TestEvent());
         }
