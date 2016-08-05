@@ -39,7 +39,7 @@ namespace Iris.Messaging.Configuration.MessageHandlerCache
             {
                 if (HandlerDetails.Any(d => d.ContainsHandlerFor(messageContract)))
                 {
-                    throw new HermesComponentRegistrationException(String.Format("A command may only be handled by one class. A duplicate command handler for command {0} was found on class {1}.", messageContract.Name, handlerType.FullName));
+                    throw new IrisComponentRegistrationException(String.Format("A command may only be handled by one class. A duplicate command handler for command {0} was found on class {1}.", messageContract.Name, handlerType.FullName));
                 }
             }
 

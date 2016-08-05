@@ -4,7 +4,6 @@ using System.Linq;
 using Iris.Equality;
 using Iris.Ioc;
 using Iris.Messaging.Configuration.MessageHandlerCache;
-using Iris.Queries;
 using Iris.Reflection;
 
 namespace Iris.Messaging.Configuration
@@ -13,18 +12,14 @@ namespace Iris.Messaging.Configuration
     {
         public static void Scan(IContainerBuilder containerBuilder)
         {
-                IEnumerable<Type> messageTypes = GetMesageTypes();
+                IEnumerable<Type> messageTypes = GetMessageTypes();
                 ICollection<Type> messageHandlerTypes = GetMessageHandlerTypes();
                 ICollection<Type> commandValidatorTypes = GetCommandValidatorTypes();
-                ICollection<Type> queryHandlerTypes = GetQueryHandlerTypes();
-                ICollection<Type> queryServiceTypes = GetQueryServiceTypes();
                 ICollection<Type> intializerTypes = GetInitializerTypes();
 
                 HandlerCache.InitializeCache(messageTypes, messageHandlerTypes);
 
                 RegisterTypes(containerBuilder, messageHandlerTypes, DependencyLifecycle.InstancePerUnitOfWork);
-                RegisterTypes(containerBuilder, queryHandlerTypes, DependencyLifecycle.InstancePerUnitOfWork);
-                RegisterTypes(containerBuilder, queryServiceTypes, DependencyLifecycle.InstancePerUnitOfWork);
                 RegisterTypes(containerBuilder, commandValidatorTypes, DependencyLifecycle.InstancePerUnitOfWork);
                 RegisterTypes(containerBuilder, intializerTypes, DependencyLifecycle.SingleInstance);
         }
@@ -37,7 +32,7 @@ namespace Iris.Messaging.Configuration
             }
         }
 
-        private static IEnumerable<Type> GetMesageTypes()
+        private static IEnumerable<Type> GetMessageTypes()
         {
             return AssemblyScanner.Types
                           .Where(Settings.IsCommandType)
@@ -62,24 +57,6 @@ namespace Iris.Messaging.Configuration
                 AssemblyScanner.Types.Where(
                     t => !t.IsAbstract &&
                         t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IValidateCommand<>)))
-                       .Distinct(new TypeEqualityComparer())
-                       .ToArray();
-        }
-
-        private static ICollection<Type> GetQueryHandlerTypes()
-        {
-            return AssemblyScanner.Types.Where(
-                    t => !t.IsAbstract && 
-                        t.GetInterfaces().Any(i => i.IsGenericType && (i.GetGenericTypeDefinition() == typeof(IEntityQuery<,>))))
-                       .Distinct(new TypeEqualityComparer())
-                       .ToArray();
-        }
-
-        private static ICollection<Type> GetQueryServiceTypes()
-        {
-            return AssemblyScanner.Types.Where(
-                    t => !t.IsAbstract &&
-                        t.GetInterfaces().Any(i => i.IsGenericType && (i.GetGenericTypeDefinition() == typeof(IQueryService<,,>))))
                        .Distinct(new TypeEqualityComparer())
                        .ToArray();
         }

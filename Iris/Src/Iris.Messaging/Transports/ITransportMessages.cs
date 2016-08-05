@@ -12,7 +12,6 @@ namespace Iris.Messaging.Transports
     public interface ITransportMessages : IDisposable
     {
         IMessageContext CurrentMessage { get; }
-        void SendMessage(OutgoingMessageContext outgoingMessageContext);
         void ProcessMessage(IncomingMessageContext incomingContext);
     }
 }

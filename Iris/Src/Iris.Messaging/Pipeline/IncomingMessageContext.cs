@@ -19,7 +19,6 @@ namespace Iris.Messaging.Pipeline
 
         public static IMessageContext Null { get; private set; }
 
-        private readonly OutgoingMessageUnitOfWork outgoingMessages;
         private readonly Guid messageId;
 
         static IncomingMessageContext()
@@ -63,7 +62,6 @@ namespace Iris.Messaging.Pipeline
             TransportMessage = transportMessage;
             messageId = transportMessage.MessageId;
             ServiceLocator = serviceLocator;
-            outgoingMessages = outgoingMessages = BuildOutgoingMessageUnitOfWork(serviceLocator);
         }
 
         public IncomingMessageContext(object localMessage, IServiceLocator serviceLocator)
@@ -74,13 +72,6 @@ namespace Iris.Messaging.Pipeline
             messageId = SequentialGuid.New();
 
             TransportMessage = new TransportMessage(messageId, messageId, Address.Local, TimeSpan.MaxValue, new Dictionary<string, string>(), new byte[0]);
-            outgoingMessages = BuildOutgoingMessageUnitOfWork(serviceLocator);
-        }
-
-        private static OutgoingMessageUnitOfWork BuildOutgoingMessageUnitOfWork(IServiceLocator serviceLocator)
-        {
-            var outgoingContext = serviceLocator.GetInstance<ModulePipeFactory<OutgoingMessageContext>>();
-            return new OutgoingMessageUnitOfWork(outgoingContext, serviceLocator);
         }
 
         public void Process(ModulePipeFactory<IncomingMessageContext> incomingPipeline)
@@ -139,17 +130,6 @@ namespace Iris.Messaging.Pipeline
             Mandate.ParameterNotNull(message, "message");
 
             Message = message;
-        }
-
-        public void Enqueue(OutgoingMessageContext outgoingMessage)
-        {
-            outgoingMessages.Enqueue(outgoingMessage);
-        }
-
-        public void SendOutgoingMessages()
-        {
-            outgoingMessages.Commit();
-            outgoingMessages.Clear();
         }
 
         public override int GetHashCode()

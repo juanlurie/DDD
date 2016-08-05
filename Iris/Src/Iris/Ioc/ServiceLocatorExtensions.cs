@@ -24,7 +24,7 @@ namespace Iris.Ioc
             {
                 return false;
             }
-            catch (HermesComponentRegistrationException)
+            catch (IrisComponentRegistrationException)
             {
                 return false;
             }
@@ -48,7 +48,7 @@ namespace Iris.Ioc
             {
                 return false;
             }
-            catch (HermesComponentRegistrationException)
+            catch (IrisComponentRegistrationException)
             {
                 return false;
             }

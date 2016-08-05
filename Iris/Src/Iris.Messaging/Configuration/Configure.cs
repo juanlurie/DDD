@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Iris;
 using Iris.Attributes;
+using Iris.Extensions;
 using Iris.Failover;
 using Iris.Ioc;
-using Iris.Messaging;
-using Iris.Messaging.Configuration;
 using Iris.Messaging.Configuration.MessageHandlerCache;
 using Iris.Reflection;
 
-// ReSharper disable CheckNamespace
-// ReSharper disable RedundantExtendsListEntry
-namespace Hermes
+namespace Iris.Messaging.Configuration
 {
     public class Configure : IConfigureEndpoint
     {
@@ -158,22 +154,6 @@ namespace Hermes
             }
         }
 
-        //private static void SubscribeToEvents()
-        //{
-        //    if (!Settings.AutoSubscribeEvents)
-        //    {
-        //         return;   
-        //    }
-
-        //    foreach (var eventType in HandlerCache.GetAllHandledMessageContracts().Where(type => Settings.IsEventType(type)))
-        //    {
-        //        if (typeof (IDomainEvent).IsAssignableFrom(eventType) && !Settings.SubsribeToDomainEvents)
-        //                continue;
-
-        //        Settings.Subscriptions.Subscribe(eventType);
-        //    }
-        //}
-
         internal void Stop()
         {
             var startableObjects = Settings.RootContainer.GetAllInstances<IAmStartable>();
@@ -190,5 +170,3 @@ namespace Hermes
         }
     }
 }
-// ReSharper restore RedundantExtendsListEntry
-// ReSharper restore CheckNamespace

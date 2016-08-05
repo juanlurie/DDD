@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-// ReSharper disable CheckNamespace
-namespace Hermes
-// ReSharper restore CheckNamespace
+namespace Iris.Extensions
 {
-    public static class ObectExtensions
+    public static class ObjectExtensions
     {
         public static bool HasAttribute<TAttribute>(this object o) where TAttribute : Attribute
         {

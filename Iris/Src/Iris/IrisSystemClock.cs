@@ -4,9 +4,9 @@ using Iris.Logging;
 
 namespace Iris
 {
-    public static class HermesSystemClock 
+    public static class IrisSystemClock 
     {
-        private static readonly ILog Logger = LogFactory.BuildLogger(typeof (HermesSystemClock));
+        private static readonly ILog Logger = LogFactory.BuildLogger(typeof (IrisSystemClock));
 
         private static readonly ThreadLocal<Func<DateTimeOffset>> CurrentResolver = new ThreadLocal<Func<DateTimeOffset>>();
 

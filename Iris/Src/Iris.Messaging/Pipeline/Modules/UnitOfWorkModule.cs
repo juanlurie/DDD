@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Hermes;
 using Iris.Attributes;
+using Iris.Extensions;
 using Iris.Logging;
 using Iris.Persistence;
 using Iris.Pipes;

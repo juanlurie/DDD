@@ -52,42 +52,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Callbacks\IManageCallbacks.cs" />
     <Compile Include="Configuration\HandlerFactory.cs" />
-    <Compile Include="Configuration\HermesConfigurationException.cs" />
-    <Compile Include="IManageErrorQueues.cs" />
+    <Compile Include="Configuration\IrisConfigurationException.cs" />
     <Compile Include="Configuration\ComponentScanner.cs" />
     <Compile Include="Configuration\CurrentUser.cs" />
     <Compile Include="EndPoints\LocalEndpoint.cs" />
-    <Compile Include="Callbacks\BusAsyncResultEventArgs.cs" />
-    <Compile Include="Callbacks\Callback.cs" />
-    <Compile Include="Callbacks\BusAsyncResult.cs" />
     <Compile Include="Configuration\MessageHandlerCache\ActionCacheItem.cs" />
     <Compile Include="Configuration\MessageHandlerCache\HandlerCache.cs" />
     <Compile Include="Configuration\MessageHandlerCache\HandlerCacheItem.cs" />
-    <Compile Include="InMemoryBusExtensions.cs" />
     <Compile Include="ITask.cs" />
     <Compile Include="Management\TransportMessageDto.cs" />
     <Compile Include="Management\TransportMessageExtensions.cs" />
+    <Compile Include="MessageExtensions.cs" />
     <Compile Include="Pipeline\IncomingMessageContext.cs" />
     <Compile Include="Pipeline\Modules\CommandValidationModule.cs" />
-    <Compile Include="Pipeline\Modules\EnqueuedMessageSenderModule.cs" />
-    <Compile Include="Pipeline\Modules\HeaderBuilderModule.cs" />
-    <Compile Include="Pipeline\Modules\MessageSerializationModule.cs" />
-    <Compile Include="Pipeline\Modules\SendMessageModule.cs" />
-    <Compile Include="Pipeline\OutgoingMessageContext.cs" />
     <Compile Include="ScheduledWorkerService.cs" />
     <Compile Include="Serialization\MessageSerializationExtensions.cs" />
     <Compile Include="Pipeline\Modules\DispatchMessagesModule.cs" />
-    <Compile Include="Pipeline\Modules\ExtractMessagesModule.cs" />
-    <Compile Include="MessageExtensions.cs" />
     <Compile Include="SytemCircuitBreaker.cs" />
     <Compile Include="TaskScheduler.cs" />
     <Compile Include="Transports\HeaderValueExtensions.cs" />
-    <Compile Include="Transports\IPublishMessages.cs" />
     <Compile Include="Transports\ITransportMessages.cs" />
-    <Compile Include="Pipeline\Modules\MessageMutatorModule.cs" />
-    <Compile Include="Transports\OutgoingMessageUnitOfWork.cs" />
     <Compile Include="Transports\SqlTransport\SqlCommands.cs" />
     <Compile Include="Transports\SqlTransport\SqlDataReaderExtensions.cs" />
     <Compile Include="Transports\SqlTransport\SqlMessageDequeStrategy.cs" />
@@ -106,7 +91,6 @@
     <Compile Include="Transports\Dispatcher.cs" />
     <Compile Include="Bus\LocalBus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transports\PollingReceiver.cs" />
     <Compile Include="Transports\Transport.cs" />
     <Compile Include="WorkerTaskFactory.cs" />
   </ItemGroup>

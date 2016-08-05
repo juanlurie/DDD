@@ -90,7 +90,7 @@ namespace Iris.EntityFramework
 
         protected virtual void AdjustTimestamps(DbEntityEntry<ITimestampPersistenceAudit> entity)
         {
-            var localTime = HermesSystemClock.UtcNow.LocalDateTime;
+            var localTime = IrisSystemClock.UtcNow.LocalDateTime;
 
             if (entity.State == EntityState.Added)
                 entity.Entity.CreatedTimestamp = entity.Entity.ModifiedTimestamp = localTime;

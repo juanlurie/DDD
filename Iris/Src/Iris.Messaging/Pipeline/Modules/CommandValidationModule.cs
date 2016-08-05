@@ -8,8 +8,7 @@ using Microsoft.Practices.ServiceLocation;
 namespace Iris.Messaging.Pipeline.Modules
 {
     public class CommandValidationModule : 
-        IModule<IncomingMessageContext>, 
-        IModule<OutgoingMessageContext>
+        IModule<IncomingMessageContext>
     {
         /// <summary>
         /// This is used for validation of commands being executed on the local bus
@@ -18,14 +17,6 @@ namespace Iris.Messaging.Pipeline.Modules
         {
             if (!input.IsControlMessage() && Settings.IsCommandType(input.Message.GetType()))
                 ValidateCommand(input.Message, input.ServiceLocator);
-
-            return next();
-        }
-
-        public bool Process(OutgoingMessageContext input, Func<bool> next)
-        {
-            if (input.OutgoingMessageType == OutgoingMessageContext.MessageType.Command)
-                ValidateCommand(input.OutgoingMessage, input.ServiceLocator);
 
             return next();
         }

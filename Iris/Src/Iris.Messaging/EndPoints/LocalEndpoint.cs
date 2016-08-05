@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using System.Threading;
-using Hermes;
 using Iris.Ioc;
 using Iris.Messaging.Configuration;
 using Iris.Messaging.Pipeline;
@@ -39,7 +38,6 @@ namespace Iris.Messaging.EndPoints
         protected virtual void ConfigurePipeline(TContainerBuilder containerBuilder)
         {
             var incomingPipeline = new ModulePipeFactory<IncomingMessageContext>()
-                .Add<EnqueuedMessageSenderModule>()
                 .Add<UnitOfWorkModule>()
                 .Add<DispatchMessagesModule>();
 

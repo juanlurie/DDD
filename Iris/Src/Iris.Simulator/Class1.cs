@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using Iris.EntityFramework;
@@ -8,6 +9,7 @@ using Iris.Ioc;
 using Iris.Messaging;
 using Iris.Messaging.EndPoints;
 using Iris.ObjectBuilder.Autofac;
+using Iris.Persistence;
 using Iris.Serialization.Json;
 
 namespace Iris.Simulator
@@ -93,11 +95,13 @@ namespace Iris.Simulator
                       , IHandleMessage<TestEvent>
     {
         private readonly IInMemoryBus localBus;
-        private IRepository<TestTable> repository;
+        private EntityFramework.IRepository<TestTable> repository;
+        private IQueryable<TestTable> query;
 
-        public Test(IInMemoryBus localBus, IRepositoryFactory repositoryFactory)
+        public Test(IInMemoryBus localBus, IRepositoryFactory repositoryFactory,IDatabaseQuery databaseQuery)
         {
             this.localBus = localBus;
+            query = databaseQuery.GetQueryable<TestTable>();
             repository = repositoryFactory.GetRepository<TestTable>();
         }
 
@@ -108,6 +112,8 @@ namespace Iris.Simulator
 
         public void Handle(TestCommand m)
         {
+            var a = query.Count();
+
             localBus.Raise(new TestEvent());
         }
     }

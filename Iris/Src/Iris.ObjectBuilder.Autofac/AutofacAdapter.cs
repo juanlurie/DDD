@@ -161,7 +161,7 @@ namespace Iris.ObjectBuilder.Autofac
             }
             catch (ComponentNotRegisteredException ex)
             {
-                throw new HermesComponentRegistrationException(ex.Message, ex);
+                throw new IrisComponentRegistrationException(ex.Message, ex);
             }
         }
 
@@ -177,7 +177,7 @@ namespace Iris.ObjectBuilder.Autofac
             }
             catch (ComponentNotRegisteredException ex)
             {
-                throw new HermesComponentRegistrationException(ex.Message, ex);
+                throw new IrisComponentRegistrationException(ex.Message, ex);
             }
         }
 
