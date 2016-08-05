@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DA7D007A-48EC-476E-AAA9-6963A300FE96}"
 	ProjectSection(SolutionItems) = preProject
@@ -23,6 +23,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iris.Serialization.Json", "Iris.Serialization.Json\Iris.Serialization.Json.csproj", "{F9F3ECB0-1FE2-48C0-B517-9B1ADC9ADD92}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iris.ServiceHost", "Iris.ServiceHost\Iris.ServiceHost.csproj", "{925AAF48-6C3C-4606-9FC6-49A5175C1B26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iris.Simulator", "Iris.Simulator\Iris.Simulator.csproj", "{B8254DD5-90A2-4602-A907-23CC4B4731A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{925AAF48-6C3C-4606-9FC6-49A5175C1B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{925AAF48-6C3C-4606-9FC6-49A5175C1B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{925AAF48-6C3C-4606-9FC6-49A5175C1B26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8254DD5-90A2-4602-A907-23CC4B4731A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8254DD5-90A2-4602-A907-23CC4B4731A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8254DD5-90A2-4602-A907-23CC4B4731A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8254DD5-90A2-4602-A907-23CC4B4731A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

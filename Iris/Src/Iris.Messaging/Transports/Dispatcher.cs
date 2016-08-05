@@ -36,21 +36,6 @@ namespace Iris.Messaging.Transports
                 handlers.Add(messageHandler);
                 Logger.Debug("Message {0} was handled by {1} in {2}", message.GetType().FullName, messageHandlerDetail.HandlerType.FullName, stopwatch.Elapsed);
             }
-
-            SaveProcessManagers(handlers);
         }
-
-        protected virtual void SaveProcessManagers(IEnumerable<object> handlers)
-        {
-            foreach (var handler in handlers)
-            {
-                var processManager = handler as IProcessManager;
-
-                if (processManager != null)
-                {
-                    processManager.Save();
-                }
-            }
-        }      
     }
 }

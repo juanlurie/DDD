@@ -58,27 +58,6 @@ namespace Iris.Messaging.Pipeline
             messageId = SequentialGuid.New();
         }
 
-        public static OutgoingMessageContext BuildDeferredCommand(Address address, Guid correlationId, TimeSpan delay, object message)
-        {
-            MessageRuleValidation.ValidateCommand(message);
-
-            var context = new OutgoingMessageContext
-            {
-                correlationId = correlationId,
-                OutgoingMessageType = MessageType.Defer,
-                outgoingMessage = message,
-                destination = address
-            };
-
-            string deliveryAddress = address.ToString();
-            string timeout = DateTime.UtcNow.Add(delay).ToWireFormattedString();
-
-            context.AddHeader(new HeaderValue(HeaderKeys.TimeoutExpire, timeout));
-            context.AddHeader(new HeaderValue(HeaderKeys.RouteExpiredTimeoutTo, deliveryAddress));
-            
-            return context;
-        }
-
         public static OutgoingMessageContext BuildCommand(Address address, Guid correlationId, TimeSpan timeToLive, object message)
         {
             MessageRuleValidation.ValidateCommand(message);
@@ -105,64 +84,6 @@ namespace Iris.Messaging.Pipeline
                 OutgoingMessageType = MessageType.Event,
                 outgoingMessage = message
             };
-
-            return context;
-        }
-
-        public static OutgoingMessageContext BuildReply(IMessageContext currentMessage, object message)
-        {
-            return BuildReply(currentMessage.ReplyToAddress, currentMessage.CorrelationId, message);
-        }
-
-        public static OutgoingMessageContext BuildReply(Address replyToAddress, Guid corrolationId, object message)
-        {
-            MessageRuleValidation.ValidateMessage(message);
-
-            var context = new OutgoingMessageContext
-            {
-                correlationId = corrolationId,
-                destination = replyToAddress,
-                OutgoingMessageType = MessageType.Reply,
-                outgoingMessage = message
-            };
-
-            return context;
-        }
-
-        public static OutgoingMessageContext BuildReturn<TEnum>(IMessageContext currentMessage, TEnum errorCode) where TEnum : struct, IComparable, IFormattable, IConvertible
-        {
-            var context = new OutgoingMessageContext
-            {
-                correlationId = currentMessage.CorrelationId,
-                destination = currentMessage.ReplyToAddress,
-                OutgoingMessageType = MessageType.Control
-            };
-
-            context.AddHeader(HeaderValue.FromEnum(HeaderKeys.ReturnErrorCode, errorCode));
-            context.AddHeader(new HeaderValue(HeaderKeys.ControlMessageHeader, true.ToString()));
-
-            return context;
-        }
-
-        public static OutgoingMessageContext BuildControl(params HeaderValue[] headers)
-        {
-            return BuildControl(Address.Undefined, headers);
-        }
-
-        public static OutgoingMessageContext BuildControl(Address address, params HeaderValue[] headers)
-        {
-            var context = new OutgoingMessageContext
-            {
-                destination = address,
-                OutgoingMessageType = MessageType.Control,
-            };
-
-            context.AddHeader(new HeaderValue(HeaderKeys.ControlMessageHeader, true.ToString()));
-
-            foreach (var headerValue in headers)
-            {
-                context.AddHeader(headerValue);
-            }
 
             return context;
         }
@@ -225,11 +146,8 @@ namespace Iris.Messaging.Pipeline
         public enum MessageType
         {
             Unknown,
-            Reply,
             Command,
-            Event,
-            Control,
-            Defer
+            Event
         }
     }
 }

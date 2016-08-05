@@ -17,11 +17,9 @@ namespace Iris.Messaging.Configuration
             containerBuilder.RegisterType<Dispatcher>(DependencyLifecycle.SingleInstance);
             containerBuilder.RegisterType<TypeMapper>(DependencyLifecycle.SingleInstance);
 
-            containerBuilder.RegisterType<AuditModule>(DependencyLifecycle.SingleInstance);
             containerBuilder.RegisterType<ExtractMessagesModule>(DependencyLifecycle.SingleInstance);
             containerBuilder.RegisterType<MessageMutatorModule>(DependencyLifecycle.SingleInstance);
             containerBuilder.RegisterType<DispatchMessagesModule>(DependencyLifecycle.SingleInstance);
-            containerBuilder.RegisterType<CallBackHandlerModule>(DependencyLifecycle.SingleInstance);
             containerBuilder.RegisterType<MessageSerializationModule>(DependencyLifecycle.SingleInstance);
             containerBuilder.RegisterType<HeaderBuilderModule>(DependencyLifecycle.SingleInstance);
             containerBuilder.RegisterType<EnqueuedMessageSenderModule>(DependencyLifecycle.SingleInstance);

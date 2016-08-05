@@ -11,7 +11,6 @@ namespace Iris.Messaging.Transports
     {
         private static readonly ILog Logger = LogFactory.BuildLogger(typeof(Transport)); 
 
-        //private readonly IReceiveMessages messageReceiver;
         private readonly IContainer container;
         private readonly ModulePipeFactory<IncomingMessageContext> incomingPipeline;
         private readonly ModulePipeFactory<OutgoingMessageContext> outgoingPipeline;
@@ -27,9 +26,7 @@ namespace Iris.Messaging.Transports
         }
 
         public Transport( IContainer container, ModulePipeFactory<IncomingMessageContext> incomingPipeline, ModulePipeFactory<OutgoingMessageContext> outgoingPipeline)
-        //public Transport(IReceiveMessages messageReceiver, IContainer container, ModulePipeFactory<IncomingMessageContext> incomingPipeline, ModulePipeFactory<OutgoingMessageContext> outgoingPipeline)
         {
-            //this.messageReceiver = messageReceiver;
             this.container = container;
             this.incomingPipeline = incomingPipeline;
             this.outgoingPipeline = outgoingPipeline;
@@ -38,26 +35,6 @@ namespace Iris.Messaging.Transports
         public void Dispose()
         {
             Logger.Debug("Dispose called; stopping message receiver.");
-            //messageReceiver.Stop();            
-        }
-
-        public void Start()
-        {
-            if (Settings.IsSendOnly)
-            {
-                Logger.Debug("Skipping starting of message receiver for sendonly endpoint.");
-            }
-            else
-            {
-                Logger.Debug("Starting message receiver.");
-                //messageReceiver.Start(MessageReceived);
-            }
-        }
-
-        public void Stop()
-        {
-            Logger.Debug("Stop called; stopping message receiver.");
-            //messageReceiver.Stop();
         }
 
         protected virtual void MessageReceived(TransportMessage transportMessage)

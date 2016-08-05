@@ -1,6 +1,5 @@
 ﻿using System.Data.Entity;
 using Iris.EntityFramework.KeyValueStore;
-using Iris.EntityFramework.ProcessManagager;
 using Iris.EntityFramework.Queries;
 using Iris.EntityFramework.Queues;
 using Iris.Ioc;
@@ -36,7 +35,6 @@ namespace Iris.EntityFramework
             containerBuilder.RegisterType<EntityFrameworkUnitOfWork>( );
             containerBuilder.RegisterType<DatabaseQuery>( );
             containerBuilder.RegisterType<KeyValueStorePersister>( );
-            containerBuilder.RegisterType<ProcessManagerPersister>( );
             containerBuilder.RegisterType<AggregateRepository>( );
             containerBuilder.RegisterType<QueueFactory>( );
             containerBuilder.RegisterType<QueueStore>( );

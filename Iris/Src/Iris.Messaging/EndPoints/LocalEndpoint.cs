@@ -25,10 +25,6 @@ namespace Iris.Messaging.EndPoints
             ConfigureEndpoint(configuration);
             ConfigurePipeline(containerBuilder);
 
-            Settings.IsSendOnly = true;
-            Settings.IsLocalEndpoint = true;
-            Settings.AutoSubscribeEvents = false;
-            Settings.FlushQueueOnStartup = true;
             Settings.RootContainer = containerBuilder.BuildContainer();
         }
 

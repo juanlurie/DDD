@@ -64,12 +64,6 @@ namespace Hermes
             return this;
         }
 
-        public IConfigureEndpoint NumberOfWorkers(int numberOfWorkers)
-        {
-            Settings.NumberOfWorkers = numberOfWorkers;
-            return this;
-        }
-
         public IConfigureEndpoint RegisterDependencies<T>() where T : IRegisterDependencies, new()
         {
             return RegisterDependencies(new T());
@@ -98,12 +92,6 @@ namespace Hermes
             return this;
         }        
 
-        public IConfigureEndpoint SendOnlyEndpoint()
-        {
-            Settings.IsSendOnly = true;
-            return this;
-        }
-
         public IConfigureEndpoint UserNameResolver(Func<string> userNameResolver)
         {
             Settings.UserNameResolver = userNameResolver;
@@ -128,7 +116,6 @@ namespace Hermes
 
             MapMessageTypes();
             RunInitializers();
-            SubscribeToEvents();
             StartServices();
         }
 
@@ -171,21 +158,21 @@ namespace Hermes
             }
         }
 
-        private static void SubscribeToEvents()
-        {
-            if (!Settings.AutoSubscribeEvents)
-            {
-                 return;   
-            }
+        //private static void SubscribeToEvents()
+        //{
+        //    if (!Settings.AutoSubscribeEvents)
+        //    {
+        //         return;   
+        //    }
 
-            foreach (var eventType in HandlerCache.GetAllHandledMessageContracts().Where(type => Settings.IsEventType(type)))
-            {
-                if (typeof (IDomainEvent).IsAssignableFrom(eventType) && !Settings.SubsribeToDomainEvents)
-                        continue;
+        //    foreach (var eventType in HandlerCache.GetAllHandledMessageContracts().Where(type => Settings.IsEventType(type)))
+        //    {
+        //        if (typeof (IDomainEvent).IsAssignableFrom(eventType) && !Settings.SubsribeToDomainEvents)
+        //                continue;
 
-                Settings.Subscriptions.Subscribe(eventType);
-            }
-        }
+        //        Settings.Subscriptions.Subscribe(eventType);
+        //    }
+        //}
 
         internal void Stop()
         {

@@ -78,8 +78,6 @@
     <Compile Include="Pipeline\OutgoingMessageContext.cs" />
     <Compile Include="ScheduledWorkerService.cs" />
     <Compile Include="Serialization\MessageSerializationExtensions.cs" />
-    <Compile Include="Pipeline\Modules\AuditModule.cs" />
-    <Compile Include="Pipeline\Modules\CallBackHandlerModule.cs" />
     <Compile Include="Pipeline\Modules\DispatchMessagesModule.cs" />
     <Compile Include="Pipeline\Modules\ExtractMessagesModule.cs" />
     <Compile Include="MessageExtensions.cs" />

@@ -11,13 +11,11 @@ namespace Iris.Messaging.Pipeline.Modules
         private static readonly ILog Logger = LogFactory.BuildLogger(typeof(SendMessageModule));
 
         private readonly ISendMessages sender;
-        private readonly IPersistTimeouts timeoutsPersister;
         private readonly IPublishMessages publisher;
 
-        public SendMessageModule(ISendMessages sender, IPersistTimeouts timeoutsPersister, IPublishMessages publisher)
+        public SendMessageModule(ISendMessages sender, IPublishMessages publisher)
         {
             this.sender = sender;
-            this.timeoutsPersister = timeoutsPersister;
             this.publisher = publisher;
         }
 
@@ -25,12 +23,7 @@ namespace Iris.Messaging.Pipeline.Modules
         {
             switch (input.OutgoingMessageType)
             {
-                case OutgoingMessageContext.MessageType.Control:
-                    SendControlMessage(input);
-                    break;
-
                 case OutgoingMessageContext.MessageType.Command:
-                case OutgoingMessageContext.MessageType.Reply:
                     SendMessage(input);
                     break;
 
@@ -54,12 +47,6 @@ namespace Iris.Messaging.Pipeline.Modules
         private void SendMessage(OutgoingMessageContext input)
         {
             Logger.Debug("Sending message {0} to {1}", input, input.Destination);
-            sender.Send(input.GetTransportMessage(), input.Destination);
-        }
-
-        private void SendControlMessage(OutgoingMessageContext input)
-        {
-            Logger.Debug("Sending control message {0} to {1}", input, input.Destination);
             sender.Send(input.GetTransportMessage(), input.Destination);
         }
     }

@@ -3,13 +3,12 @@ using System.Threading;
 using System.Transactions;
 using Iris.Backoff;
 using Iris.Logging;
-using Iris.Messaging.Configuration;
 
 namespace Iris.Messaging.Transports
-{  
+{
     public class PollingReceiver : IReceiveMessages
     {
-        private static readonly ILog Logger = LogFactory.BuildLogger(typeof (PollingReceiver));
+        private static readonly ILog Logger = LogFactory.BuildLogger(typeof(PollingReceiver));
 
         private CancellationTokenSource tokenSource;
         private readonly IDequeueMessages dequeueStrategy;
@@ -25,15 +24,12 @@ namespace Iris.Messaging.Transports
             messageReceived = handleMessage;
             tokenSource = new CancellationTokenSource();
 
-            for (int i = 0; i < Settings.NumberOfWorkers; i++)
-            {
-                WorkerTaskFactory.Start(WorkerAction, tokenSource.Token);
-            }
+            WorkerTaskFactory.Start(WorkerAction, tokenSource.Token);
         }
-    
+
         public void Stop()
         {
-            if(tokenSource != null)
+            if (tokenSource != null)
                 tokenSource.Cancel();
         }
 
@@ -82,6 +78,6 @@ namespace Iris.Messaging.Transports
             {
                 backoff.Delay();
             }
-        }        
+        }
     }
 }

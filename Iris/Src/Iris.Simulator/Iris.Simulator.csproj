@@ -1,122 +1,94 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6FD32DC4-BA2B-4B5E-9666-7C6ED5AAE09A}</ProjectGuid>
+    <ProjectGuid>{B8254DD5-90A2-4602-A907-23CC4B4731A3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Iris.EntityFramework</RootNamespace>
-    <AssemblyName>Iris.EntityFramework</AssemblyName>
+    <RootNamespace>Iris.Simulator</RootNamespace>
+    <AssemblyName>Iris.Simulator</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AggregateRepository.cs" />
-    <Compile Include="AggregateCommitAction.cs" />
-    <Compile Include="ConcurrencyException.cs" />
-    <Compile Include="ContextConfiguration.cs" />
-    <Compile Include="ContextInitializer.cs" />
-    <Compile Include="DatabaseExtensions.cs" />
-    <Compile Include="DbContextExtensions.cs" />
-    <Compile Include="DbSetExtensions.cs" />
-    <Compile Include="EntityFrameworkConfiguration.cs" />
-    <Compile Include="EntityValidationException.cs" />
-    <Compile Include="ContextFactory.cs" />
-    <Compile Include="EntityFrameworkUnitOfWork.cs" />
-    <Compile Include="EntityTypeConfigurationExtensions.cs" />
-    <Compile Include="FrameworkContext.cs" />
-    <Compile Include="IContextFactory.cs" />
-    <Compile Include="IncompatibleDatabaseModelException.cs" />
-    <Compile Include="IRepositoryFactory.cs" />
-    <Compile Include="KeyValueStore\KeyValueEntity.cs" />
-    <Compile Include="KeyValueStore\KeyValueEntityConfiguration.cs" />
-    <Compile Include="KeyValueStore\KeyValueStorePersister.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="OrderedQueryableExtensions.cs" />
-    <Compile Include="Queries\DatabaseQuery.cs" />
-    <Compile Include="Queues\QueueStore.cs" />
-    <Compile Include="Queues\QueueFactory.cs" />
-    <Compile Include="Queues\QueueSqlCommands.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>QueueSqlCommands.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Iris.Domain\Iris.Domain.csproj">
-      <Project>{0AAB1D40-4A95-4893-8127-694AEED84258}</Project>
-      <Name>Iris.Domain</Name>
+    <ProjectReference Include="..\Iris.EntityFramework\Iris.EntityFramework.csproj">
+      <Project>{6FD32DC4-BA2B-4B5E-9666-7C6ED5AAE09A}</Project>
+      <Name>Iris.EntityFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Iris.Messaging\Iris.Messaging.csproj">
-      <Project>{ac67efd9-6b5b-4a85-b310-bcb6821339cd}</Project>
+      <Project>{AC67EFD9-6B5B-4A85-B310-BCB6821339CD}</Project>
       <Name>Iris.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Iris.ObjectBuilder.Autofac\Iris.ObjectBuilder.Autofac.csproj">
+      <Project>{DB529F69-F0FE-4B40-BC7F-46850A7B400B}</Project>
+      <Name>Iris.ObjectBuilder.Autofac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Iris.Serialization.Json\Iris.Serialization.Json.csproj">
+      <Project>{F9F3ECB0-1FE2-48C0-B517-9B1ADC9ADD92}</Project>
+      <Name>Iris.Serialization.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Iris.ServiceHost\Iris.ServiceHost.csproj">
+      <Project>{925aaf48-6c3c-4606-9fc6-49a5175c1b26}</Project>
+      <Name>Iris.ServiceHost</Name>
     </ProjectReference>
     <ProjectReference Include="..\Iris\Iris.csproj">
       <Project>{2266CC77-210B-48DB-8FA9-29C4CB432C1A}</Project>
       <Name>Iris</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Queues\QueueSqlCommands.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>QueueSqlCommands.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ProcessManager\" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
