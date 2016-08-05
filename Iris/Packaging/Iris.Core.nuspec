@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Iris.Core</id>
+    <version>$version$</version>
+    <authors>Juan Lurie</authors>
+    <owners>Juan Lurie</owners>
+    <projectUrl>https://github.com/JuanLurie/Iris</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Core Iris core libraries.</description>
+    <dependencies>
+      <dependency id="CommonServiceLocator" version="1.3" />
+      <dependency id="log4net" version="2.0.3" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\bin\Iris.dll" target="lib\net45" />
+    <file src="..\bin\Iris.pdb" target="lib\net45" />
+    <file src="..\bin\Iris.Domain.dll" target="lib\net45" />
+    <file src="..\bin\Iris.Domain.pdb" target="lib\net45" />
+  </files>
+</package>

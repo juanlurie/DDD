@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Iris.ServiceHost</id>
+    <version>$version$</version>
+    <authors>Juan Lurie</authors>
+    <owners>Juan Lurie</owners>
+    <projectUrl>https://github.com/JuanLurie/Iris</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Service hosting framework using Topshelf.</description>
+    <dependencies>
+      <dependency id="Iris.Core"/>
+      <dependency id="log4net" version="2.0.3" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\bin\Iris.ServiceHost.exe" target="lib\net45" />
+    <file src="..\bin\Iris.ServiceHost.pdb" target="lib\net45" />
+    <file src="..\bin\Topshelf.dll" target="lib\net45"/>
+  </files>
+</package>

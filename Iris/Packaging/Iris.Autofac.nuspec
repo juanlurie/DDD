@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Iris.Autofac</id>
+    <version>$version$</version>
+    <authors>Juan Lurie</authors>
+    <owners>Juan Lurie</owners>
+    <projectUrl>https://github.com/JuanLurie/Iris</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Iris Autofac Adapter.</description>
+    <dependencies>
+      <dependency id="Autofac" version="3.5.2" />
+      <dependency id="Iris.Core"/>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\bin\Iris.ObjectBuilder.Autofac.dll" target="lib\net45" />
+    <file src="..\bin\Iris.ObjectBuilder.Autofac.pdb" target="lib\net45" />
+  </files>
+</package>

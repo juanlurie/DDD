@@ -1,10 +1,10 @@
-set var=10.0.5
+set var=1.0.0
 
-c:\LocalNugetPackages\nuget pack Hermes.Core.nuspec -Version %var%
-c:\LocalNugetPackages\nuget pack Hermes.Messaging.nuspec -Version %var%
-c:\LocalNugetPackages\nuget pack Hermes.EntityFramework.nuspec -Version %var%
-c:\LocalNugetPackages\nuget pack Hermes.ServiceHost.nuspec -Version %var%
-c:\LocalNugetPackages\nuget pack Hermes.Autofac.nuspec -Version %var%
+c:\LocalNugetPackages\nuget pack Iris.Core.nuspec -Version %var%
+c:\LocalNugetPackages\nuget pack Iris.Messaging.nuspec -Version %var%
+c:\LocalNugetPackages\nuget pack Iris.EntityFramework.nuspec -Version %var%
+c:\LocalNugetPackages\nuget pack Iris.ServiceHost.nuspec -Version %var%
+c:\LocalNugetPackages\nuget pack Iris.Autofac.nuspec -Version %var%
 
 move *.nupkg c:\\LocalNugetPackages
 
